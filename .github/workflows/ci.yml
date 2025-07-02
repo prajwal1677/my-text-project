@@ -1,0 +1,23 @@
+name: Test Project
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Print project file structure
+        run: ls -R
+
+      - name: Run basic test
+        run: |
+          echo "Running basic test..."
+          [ -f README.md ] && echo "README exists ✅" || echo "README missing ❌"
