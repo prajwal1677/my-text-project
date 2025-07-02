@@ -1,0 +1,27 @@
+name: File Check Workflow
+
+on:
+ push:
+   branches:[ main ]
+ pull_request:
+
+jobs:
+  check-files:
+    runs-on: ubuntu-latest
+
+    steps:
+       - name: Checkout Code
+         uses: actions/checkout@v4
+
+       - name: Check for required .txt files
+         run: |
+             echo "Checking file existence..."
+
+             for file in info.txt notes.txt sample.txt three.txt; do
+               if [ -f "$file" ]; then
+              echo "$file exists"
+               else
+               echo "file is missing"
+               exit 1
+               fi
+             done
